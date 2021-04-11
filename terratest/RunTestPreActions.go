@@ -13,13 +13,13 @@ func RunTestPreActions(t *testing.T, testFilePath string, terraformVariables map
 	fmt.Printf("\n")
 	fmt.Printf("\n")
 	fmt.Printf("\n")
-	wd, _ := os.Getwd()
+	workingDirectoryPath, _ := os.Getwd()
 	fmt.Printf("WorkingDir: %s\n", wd)
 	fmt.Printf("TestScript: %s\n", testFilePath)
 	fmt.Printf("\n")
 
 	// Save Terraform variables to file
-	testVariablesFilePath := GetTestVariablesFilePath(terraform.GetTerraformRelativeDirectoryPath(), GetTestVariablesFileName())
+	testVariablesFilePath := GetTestVariablesFilePath(workingDirectoryPath, GetTestVariablesFileName())
 	fmt.Printf("Saving Terraform variables to '%s'...\n", testVariablesFilePath)
 	terraform.SaveTerraformVariablesToFile(testVariablesFilePath, terraformVariables)
 
