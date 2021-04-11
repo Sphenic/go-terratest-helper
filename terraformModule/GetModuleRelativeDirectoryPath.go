@@ -1,5 +1,9 @@
 package terraformModule
 
+import (
+	"github.com/sphenic/go-terratest-helper/terraform"
+)
+
 func GetModuleRelativeDirectoryPath() string {
-	return "../"
+	return terraform.GetTerraformRelativeDirectoryPath()
 }
