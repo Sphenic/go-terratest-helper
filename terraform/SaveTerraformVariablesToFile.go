@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func SaveTerraformVariablesToFile(variables map[string]interface{}, filePath string) {
+func SaveTerraformVariablesToFile(filePath string, variables map[string]interface{}) {
 
 	jsonFile, errOpenFile := os.OpenFile(filePath, os.O_CREATE, os.ModePerm)
 	if errOpenFile != nil {
