@@ -14,7 +14,7 @@ func RunTestPreActions(t *testing.T, testFilePath string, terraformVariables map
 	fmt.Printf("\n")
 	fmt.Printf("\n")
 	workingDirectoryPath, _ := os.Getwd()
-	fmt.Printf("WorkingDir: %s\n", wd)
+	fmt.Printf("WorkingDir: %s\n", workingDirectoryPath)
 	fmt.Printf("TestScript: %s\n", testFilePath)
 	fmt.Printf("\n")
 
