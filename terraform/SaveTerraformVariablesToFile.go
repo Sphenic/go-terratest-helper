@@ -1,4 +1,4 @@
-package terratest
+package terraform
 
 import (
 	"encoding/json"
