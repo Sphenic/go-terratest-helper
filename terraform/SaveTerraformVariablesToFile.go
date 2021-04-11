@@ -8,6 +8,8 @@ import (
 
 func SaveTerraformVariablesToFile(filePath string, variables map[string]interface{}) {
 
+	os.Remove(filePath)
+
 	jsonFile, errOpenFile := os.OpenFile(filePath, os.O_CREATE|os.O_RDWR, os.ModePerm)
 	if errOpenFile != nil {
 		log.Fatal(errOpenFile)
