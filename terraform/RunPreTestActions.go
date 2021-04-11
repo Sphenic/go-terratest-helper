@@ -1,11 +1,11 @@
 package terraform
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
 
-func PreTestActions(t *testing.T, testFilePath string) {
+func RunPreTestActions(t *testing.T, testFilePath string) {
 
 	fmt.Printf("\n")
 	fmt.Printf("\n")
