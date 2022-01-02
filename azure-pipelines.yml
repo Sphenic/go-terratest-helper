@@ -14,7 +14,7 @@ jobs:
   - name: goModuleDirectoryPath
     value: "$(Build.sourcesDirectory)/terratest-helper"
   - name: goModuleDirectoryPathFromSrc
-    value: "src/terratest-helper"
+    value: ""
   
   pool:
     vmImage: "$(Agent.Pool.Ubuntu.VmImage.Name)"
