@@ -12,6 +12,6 @@ resources:
       name: 'Sphenic.Development/Sphenic.Vsts.Pipeline.Template.Yaml'
 
 jobs:
-- template: 'src/Pipelines/Build/Template.Pipeline.Build.Gp.Module.yml@templates'
+- template: 'src/Pipelines/Build/Template.Pipeline.Build.Go.Module.yml@templates'
   parameters:
     goModuleName: 'terratest-helper'
