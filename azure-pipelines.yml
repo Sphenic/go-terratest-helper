@@ -1,0 +1,69 @@
+parameters:
+  moduleAction: 'Push'
+  feedPublish: 'a13c67ef-9c5b-451c-9e54-67d56dfa8f5f/8884a1a3-8f90-492f-a70e-37fb76a6ca6c'
+  goModuleName:
+  goModuleDirectoryPath: "$(Build.sourcesDirectory)/$(goModuleName)"
+  goModuleDirectoryPathFromSrc: "src/$(goModuleName)"
+
+jobs:
+- job: 'Go_Module_BuildTestPackPush'
+  displayName: 'Go_Module_BuildTestPackPush'
+
+  variables:
+  - group: Sphenic.Build.Agent.Pool.Ubuntu
+  - group: Sphenic.Build.Go.Module
+  
+  pool:
+    vmImage: "$(Agent.Pool.Ubuntu.VmImage.Name)"
+  
+  steps:
+  - checkout: self
+    clean: true
+
+  - task: GoTool@0
+    displayName: "Go - Install - v$(Go.Version)"
+    inputs:
+      version: "$(Go.Version)"
+      goPath: "$(Go.Path)"
+      goBin: "$(Go.BinPath)"
+
+  - task: Go@0
+    displayName: "Go - Get: '${{ parameters.goModuleName }}' module"
+    inputs:
+      arguments: -v -t -d ./...
+      workingDirectory: "${{ parameters.goModuleDirectoryPathFromSrc }}"
+
+  - task: Go@0
+    displayName: "Go - Build: '${{ parameters.goModuleName }}' module"
+    inputs:
+      command: build
+      arguments: -v ./...
+      workingDirectory: "${{ parameters.goModuleDirectoryPathFromSrc }}"
+
+  - task: Go@0
+    displayName: "Go - Mod Vendor: '${{ parameters.goModuleName }}' module"
+    inputs:
+      command: custom
+      customCommand: mod
+      arguments: vendor
+      workingDirectory: "${{ parameters.goModuleDirectoryPathFromSrc }}"
+
+  - task: Go@0
+    displayName: "Go - Build (Vendor): '${{ parameters.goModuleName }}' module"
+    inputs:
+      command: build
+      arguments: -v -mod=vendor ./...
+      workingDirectory: "${{ parameters.goModuleDirectoryPathFromSrc }}"
+
+#  - task: NuGetCommand@2
+#    displayName: NuGet - Pack '${{ parameters.goModuleName }}'
+#    inputs:
+#      command: pack
+#      searchPatternPack: "src/${{ parameters.goModuleName }}/*.nuspec"
+#      versioningScheme: byBuildNumber
+
+#  - task: NuGetCommand@2
+#    displayName: NuGet - Push '${{ parameters.goModuleName }}'
+#    inputs:
+#      command: push
+#      feedPublish: "${{ parameters.feedPublish }}"
