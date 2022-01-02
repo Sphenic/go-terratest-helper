@@ -1,0 +1,17 @@
+trigger:
+  branches:
+    include:
+    - master
+    - main
+
+name: '$(BuildDefinitionName)_0.0.$(date:yyyyMMdd)$(rev:.r)'
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: 'Sphenic.Development/Sphenic.Vsts.Pipeline.Template.Yaml'
+
+jobs:
+- template: 'src/Pipelines/Build/Template.Pipeline.Build.Terraform.Module.yml@templates'
+  parameters:
+    goModuleName: 'terratest-helper'
