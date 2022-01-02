@@ -1,9 +1,9 @@
 parameters:
   moduleAction: 'Push'
   feedPublish: 'a13c67ef-9c5b-451c-9e54-67d56dfa8f5f/8884a1a3-8f90-492f-a70e-37fb76a6ca6c'
-  goModuleName:
-  goModuleDirectoryPath: "$(Build.sourcesDirectory)/$(goModuleName)"
-  goModuleDirectoryPathFromSrc: "src/$(goModuleName)"
+  goModuleName: 'terratest-helper'
+  goModuleDirectoryPath: "$(Build.sourcesDirectory)/terratest-helper"
+  goModuleDirectoryPathFromSrc: "src/terratest-helper"
 
 jobs:
 - job: 'Go_Module_BuildTestPackPush'
